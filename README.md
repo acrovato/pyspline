@@ -17,6 +17,22 @@ Please see the [documentation](https://mdolab-pyspline.readthedocs-hosted.com/en
 To locally build the documentation, enter the `doc` folder and enter `make html` in terminal.
 You can then view the built documentation in the `_build` folder.
 
+### Build procedure (to be moved to the actual doc)
+#### Unix (gcc + gfortran/ifort)
+```sh
+./path/to/Intel/oneAPI/compiler/version/env/vars.sh" intel64 # if required, set up Intel Fortran env
+mkdir build && cd build
+cmake .. && make install
+cd .. && python -m pip install . [--user]
+```
+#### Windows (MSVC + ifort)
+```bat
+"Path\to\MSVC\version\BuildTools\VC\Auxiliary\Build\vcvarsall.bat" amd64 REM set up MSVC env
+"Path\to\Intel\oneAPI\compiler\version\env\vars.bat" intel64 REM set up Intel Fortran env
+mkdir build && cd build
+cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_Fortran_COMPILER=ifort .. && cmake --build . --target install
+cd .. && python -m pip install . [--user]
+```
 
 Citation
 --------

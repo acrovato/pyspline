@@ -1,6 +1,7 @@
 from setuptools import setup
 import re
 import os
+import platform
 
 __version__ = re.findall(
     r"""__version__ = ["']+([0-9\.]*)["']+""",
@@ -14,6 +15,11 @@ with open(os.path.join(this_directory, "README.md"), encoding="utf-8") as f:
 with open("doc/requirements.txt") as f:
     docs_require = f.read().splitlines()
 
+if 'Windows' in platform.uname():
+    exts = ["*.pyd", "*.lib"]
+else:
+    exts = ["*.so"]
+
 setup(
     name="pyspline",
     version=__version__,
@@ -26,7 +32,7 @@ setup(
     url="https://github.com/mdolab/pyspline",
     license="Apache License Version 2.0",
     packages=["pyspline"],
-    package_data={"pyspline": ["*.so"]},
+    package_data={"pyspline": exts},
     install_requires=["numpy>=1.16", "scipy>=1.2"],
     extra_requires={
         "docs": docs_require,

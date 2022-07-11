@@ -10,6 +10,8 @@ doc/_build/*
 *.a
 *.mod
 *.so
+*.pyd
+*.lib
 *.out
 *.egg-info
 config.mk
